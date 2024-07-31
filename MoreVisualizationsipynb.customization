@@ -1,0 +1,284 @@
+{
+  "metadata": {
+    "kernelspec": {
+      "name": "python",
+      "display_name": "Python (Pyodide)",
+      "language": "python"
+    },
+    "language_info": {
+      "name": ""
+    },
+    "widgets": {
+      "application/vnd.jupyter.widget-state+json": {
+        "version_major": 2,
+        "version_minor": 0,
+        "state": {}
+      }
+    }
+  },
+  "nbformat_minor": 4,
+  "nbformat": 4,
+  "cells": [
+    {
+      "cell_type": "code",
+      "source": "import numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\n\n%matplotlib inline",
+      "metadata": {
+        "trusted": true
+      },
+      "outputs": [],
+      "execution_count": null
+    },
+    {
+      "cell_type": "code",
+      "source": "x = np.arange(-10, 11)",
+      "metadata": {
+        "trusted": true
+      },
+      "outputs": [],
+      "execution_count": null
+    },
+    {
+      "cell_type": "code",
+      "source": "plt.figure(figsize=(12, 6))\n\nplt.title('My Nice Plot')\n\nplt.plot(x, x ** 2)\nplt.plot(x, -1 * (x ** 2))",
+      "metadata": {
+        "trusted": true
+      },
+      "outputs": [],
+      "execution_count": null
+    },
+    {
+      "cell_type": "code",
+      "source": "plt.figure(figsize=(12, 6))\nplt.title('My Nice Plot')\n\nplt.subplot(1, 2, 1)  # rows, columns, panel selected\nplt.plot(x, x ** 2)\nplt.plot([0, 0, 0], [-10, 0, 100])\nplt.legend(['X^2', 'Vertical Line'])\nplt.xlabel('X')\nplt.ylabel('X Squared')\n\nplt.subplot(1, 2, 2)\nplt.plot(x, -1 * (x ** 2))\nplt.plot([-10, 0, 10], [-50, -50, -50])\nplt.legend(['-X^2', 'Horizontal Line'])\n\nplt.xlabel('X')\nplt.ylabel('X Squared')",
+      "metadata": {
+        "trusted": true
+      },
+      "outputs": [],
+      "execution_count": null
+    },
+    {
+      "cell_type": "code",
+      "source": "fig, axes = plt.subplots(figsize=(12, 6))",
+      "metadata": {
+        "trusted": true
+      },
+      "outputs": [],
+      "execution_count": null
+    },
+    {
+      "cell_type": "code",
+      "source": "axes.plot(\n    x, (x ** 2), color='red', linewidth=3,\n    marker='o', markersize=8, label='X^2')\n\naxes.plot(x, -1 * (x ** 2), 'b--', label='-X^2')\n\naxes.set_xlabel('X')\naxes.set_ylabel('X Squared')\n\naxes.set_title(\"My Nice Plot\")\n\naxes.legend()\n\nfig",
+      "metadata": {
+        "trusted": true
+      },
+      "outputs": [],
+      "execution_count": null
+    },
+    {
+      "cell_type": "code",
+      "source": "fig, axes = plt.subplots(figsize=(12, 6))\n\naxes.plot(x, x + 0, linestyle='solid')\naxes.plot(x, x + 1, linestyle='dashed')\naxes.plot(x, x + 2, linestyle='dashdot')\naxes.plot(x, x + 3, linestyle='dotted');\n\naxes.set_title(\"My Nice Plot\")",
+      "metadata": {
+        "trusted": true
+      },
+      "outputs": [],
+      "execution_count": null
+    },
+    {
+      "cell_type": "code",
+      "source": "fig, axes = plt.subplots(figsize=(12, 6))\n\naxes.plot(x, x + 0, '-og', label=\"solid green\")\naxes.plot(x, x + 1, '--c', label=\"dashed cyan\")\naxes.plot(x, x + 2, '-.b', label=\"dashdot blue\")\naxes.plot(x, x + 3, ':r', label=\"dotted red\")\n\naxes.set_title(\"My Nice Plot\")\n\naxes.legend()",
+      "metadata": {
+        "trusted": true
+      },
+      "outputs": [],
+      "execution_count": null
+    },
+    {
+      "cell_type": "code",
+      "source": "print('Markers: {}'.format([m for m in plt.Line2D.markers]))",
+      "metadata": {
+        "trusted": true
+      },
+      "outputs": [],
+      "execution_count": null
+    },
+    {
+      "cell_type": "code",
+      "source": "linestyles = ['_', '-', '--', ':']\n\nprint('Line styles: {}'.format(linestyles))",
+      "metadata": {
+        "trusted": true
+      },
+      "outputs": [],
+      "execution_count": null
+    },
+    {
+      "cell_type": "code",
+      "source": "plot_objects = plt.subplots()\n\nfig, ax = plot_objects\n\nax.plot([1,2,3], [1,2,3])\n\nplot_objects",
+      "metadata": {
+        "trusted": true
+      },
+      "outputs": [],
+      "execution_count": null
+    },
+    {
+      "cell_type": "code",
+      "source": "plot_objects = plt.subplots(nrows=2, ncols=2, figsize=(14, 6))\n\nfig, ((ax1, ax2), (ax3, ax4)) = plot_objects\n\nplot_objects",
+      "metadata": {
+        "trusted": true
+      },
+      "outputs": [],
+      "execution_count": null
+    },
+    {
+      "cell_type": "code",
+      "source": "ax4.plot(np.random.randn(50), c='yellow')\nax1.plot(np.random.randn(50), c='red', linestyle='--')\nax2.plot(np.random.randn(50), c='green', linestyle=':')\nax3.plot(np.random.randn(50), c='blue', marker='o', linewidth=3.0)\n\n\nfig",
+      "metadata": {
+        "trusted": true
+      },
+      "outputs": [],
+      "execution_count": null
+    },
+    {
+      "cell_type": "code",
+      "source": "plt.figure(figsize=(14, 6))\n\nax1 = plt.subplot2grid((3,3), (0,0), colspan=3)\nax2 = plt.subplot2grid((3,3), (1,0), colspan=2)\nax3 = plt.subplot2grid((3,3), (1,2), rowspan=2)\nax4 = plt.subplot2grid((3,3), (2,0))\nax5 = plt.subplot2grid((3,3), (2,1))",
+      "metadata": {
+        "trusted": true
+      },
+      "outputs": [],
+      "execution_count": null
+    },
+    {
+      "cell_type": "code",
+      "source": "N = 50\nx = np.random.rand(N)\ny = np.random.rand(N)\ncolors = np.random.rand(N)\narea = np.pi * (20 * np.random.rand(N))**2  # 0 to 15 point radii",
+      "metadata": {
+        "trusted": true
+      },
+      "outputs": [],
+      "execution_count": null
+    },
+    {
+      "cell_type": "code",
+      "source": "plt.figure(figsize=(14, 6))\n\nplt.scatter(x, y, s=area, c=colors, alpha=0.5, cmap='Spectral')\nplt.colorbar()\n\nplt.show()",
+      "metadata": {
+        "trusted": true
+      },
+      "outputs": [],
+      "execution_count": null
+    },
+    {
+      "cell_type": "code",
+      "source": "fig = plt.figure(figsize=(14, 6))\n\nax1 = fig.add_subplot(1,2,1)\nplt.scatter(x, y, s=area, c=colors, alpha=0.5, cmap='Pastel1')\nplt.colorbar()\n\nax2 = fig.add_subplot(1,2,2)\nplt.scatter(x, y, s=area, c=colors, alpha=0.5, cmap='Pastel2')\nplt.colorbar()\n\nplt.show()",
+      "metadata": {
+        "trusted": true
+      },
+      "outputs": [],
+      "execution_count": null
+    },
+    {
+      "cell_type": "code",
+      "source": "values = np.random.randn(1000)",
+      "metadata": {
+        "trusted": true
+      },
+      "outputs": [],
+      "execution_count": null
+    },
+    {
+      "cell_type": "code",
+      "source": "plt.subplots(figsize=(12, 6))\n\nplt.hist(values, bins=100, alpha=0.8,\n          histtype='bar', color='steelblue',\n          edgecolor='green')\nplt.xlim(xmin=-5, xmax=5)\n\nplt.show()",
+      "metadata": {
+        "trusted": true
+      },
+      "outputs": [],
+      "execution_count": null
+    },
+    {
+      "cell_type": "code",
+      "source": "fig.savefig('hist.png')",
+      "metadata": {
+        "trusted": true
+      },
+      "outputs": [],
+      "execution_count": null
+    },
+    {
+      "cell_type": "code",
+      "source": "from scipy import stats\n\ndensity = stats.kde.gaussian_kde(values)\ndensity",
+      "metadata": {
+        "trusted": true
+      },
+      "outputs": [],
+      "execution_count": null
+    },
+    {
+      "cell_type": "code",
+      "source": "plt.subplots(figsize=(12, 6))\n\nvalues2 = np.linspace(min(values)-10, max(values)+10, 100)\n\nplt.plot(values2, density(values2), color='#FF7F00')\nplt.fill_between(values2, 0, density(values2), alpha=0.5, color='#FF7F00')\nplt.xlim(xmin=-5, xmax=5)\n\nplt.show()",
+      "metadata": {
+        "trusted": true
+      },
+      "outputs": [],
+      "execution_count": null
+    },
+    {
+      "cell_type": "code",
+      "source": "plt.subplots(figsize=(12, 6))\n\nplt.hist(values, bins=100, alpha=0.8, density=1,\n          histtype='bar', color='steelblue',\n          edgecolor='green')\n\nplt.plot(values2, density(values2), color='#FF7F00', linewidth=3.0)\nplt.xlim(xmin=-5, xmax=5)\n\nplt.show()",
+      "metadata": {
+        "trusted": true
+      },
+      "outputs": [],
+      "execution_count": null
+    },
+    {
+      "cell_type": "code",
+      "source": "Y = np.random.rand(1, 5)[0]\nY2 = np.random.rand(1, 5)[0]",
+      "metadata": {
+        "trusted": true
+      },
+      "outputs": [],
+      "execution_count": null
+    },
+    {
+      "cell_type": "code",
+      "source": "plt.figure(figsize=(12, 4))\n\nbarWidth = 0.5\nplt.bar(np.arange(len(Y)), Y, width=barWidth, color='#00b894')\n\nplt.show()",
+      "metadata": {
+        "trusted": true
+      },
+      "outputs": [],
+      "execution_count": null
+    },
+    {
+      "cell_type": "code",
+      "source": "plt.figure(figsize=(12, 4))\n\nbarWidth = 0.5\nplt.bar(np.arange(len(Y)), Y, width=barWidth, color='#00b894', label='Label Y')\nplt.bar(np.arange(len(Y2)), Y2, width=barWidth, color='#e17055', bottom=Y, label='Label Y2')\n\nplt.legend()\nplt.show()",
+      "metadata": {
+        "trusted": true
+      },
+      "outputs": [],
+      "execution_count": null
+    },
+    {
+      "cell_type": "code",
+      "source": "values = np.concatenate([np.random.randn(10), np.array([10, 15, -10, -15]",
+      "metadata": {
+        "trusted": true
+      },
+      "outputs": [],
+      "execution_count": null
+    },
+    {
+      "cell_type": "code",
+      "source": "plt.figure(figsize=(12, 4))\n\nplt.hist(values)",
+      "metadata": {
+        "trusted": true
+      },
+      "outputs": [],
+      "execution_count": null
+    },
+    {
+      "cell_type": "code",
+      "source": "plt.figure(figsize=(12, 4))\n\nplt.boxplot(values)",
+      "metadata": {
+        "trusted": true
+      },
+      "outputs": [],
+      "execution_count": null
+    }
+  ]
+}
